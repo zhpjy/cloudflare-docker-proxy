@@ -16,6 +16,7 @@
     "build": "webpack",
     "dev": "wrangler dev src/index.js --env dev"
   },
+  "packageManager": "yarn@1.22.22",
   "license": "MIT",
   "main": "src/index.js"
 }
