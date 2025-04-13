@@ -3,7 +3,7 @@ addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
 
-const dockerHub = "https://registry-1io";
+const dockerHub = "https://registry-1.docker.io";
 
 const routes = {
   // production
@@ -36,7 +36,8 @@ async function handleRequest(request) {
   if (upstream === "") {
     return new Response(
       JSON.stringify({
-        routes: routes,
+        // routes: routes,
+        "hello":"world"
       }),
       {
         status: 404,
