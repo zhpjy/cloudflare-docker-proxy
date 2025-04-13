@@ -18,12 +18,12 @@ CUSTOM_DOMAIN = "exmaple.com"
 name = "cloudflare-docker-proxy"
 routes = [
   { pattern = "docker.zhpjy.top", custom_domain = true },
-  { pattern = "quay.zhpjy.top", custom_domain = true },
-  { pattern = "gcr.zhpjy.top", custom_domain = true },
-  { pattern = "k8s-gcr.zhpjy.top", custom_domain = true },
-  { pattern = "k8s.zhpjy.top", custom_domain = true },
-  { pattern = "ghcr.zhpjy.top", custom_domain = true },
-  { pattern = "cloudsmith.zhpjy.top", custom_domain = true },
+  { pattern = "quay.docker.zhpjy.top", custom_domain = true },
+  { pattern = "gcr.docker.zhpjy.top", custom_domain = true },
+  { pattern = "k8s-gcr.docker.zhpjy.top", custom_domain = true },
+  { pattern = "k8s.docker.zhpjy.top", custom_domain = true },
+  { pattern = "ghcr.docker.zhpjy.top", custom_domain = true },
+  { pattern = "cloudsmith.docker.zhpjy.top", custom_domain = true },
 ]
 
 [env.production.vars]
