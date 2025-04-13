@@ -28,13 +28,15 @@ function routeByHosts(host) {
   return "";
 }
 
-const upstream = routeByHosts(url.hostname);
-const isDockerHub = upstream == dockerHub;
-const DOCKER_REGISTRY = routeByHosts(url.hostname);
-const PROXY_REGISTRY = url.hostname;
+
 
 async function handleRequest(request) {
-  const url = new URL(request.url)
+  const url = new URL(request.url);
+  const upstream = routeByHosts(url.hostname);
+  const isDockerHub = upstream == dockerHub;
+  const DOCKER_REGISTRY = routeByHosts(url.hostname);
+  const PROXY_REGISTRY = url.hostname;
+
   const path = url.pathname
   if (path === '/v2/') {
       return challenge(DOCKER_REGISTRY, url.host)
