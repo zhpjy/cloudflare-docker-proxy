@@ -28,12 +28,12 @@ function routeByHosts(host) {
   return "";
 }
 
-
+let isDockerHub = false;
 
 async function handleRequest(request) {
   const url = new URL(request.url);
   const upstream = routeByHosts(url.hostname);
-  const isDockerHub = upstream == dockerHub;
+  isDockerHub = upstream == dockerHub;
   const DOCKER_REGISTRY = routeByHosts(url.hostname);
   const PROXY_REGISTRY = url.hostname;
 
@@ -47,7 +47,7 @@ async function handleRequest(request) {
   }
 
   const parts = path.split('/')
-  if (parts.length === 5) {
+  if (parts.length === 5 && isDockerHub) {
       parts.splice(2, 0, 'library')
       const newUrl = new URL(PROXY_REGISTRY)
       newUrl.pathname = parts.join('/')
@@ -85,7 +85,7 @@ async function getData(upstream, req) {
   const request = new Request(url, {
       method: req.method,
       headers: req.headers,
-      redirect: 'follow'
+      redirect: isDockerHub ? "manual" : "follow"
   })
 
   const response = await fetch(request)
