@@ -28,6 +28,7 @@ function routeByHosts(host) {
   return "";
 }
 
+const upstream = routeByHosts(url.hostname);
 const isDockerHub = upstream == dockerHub;
 const DOCKER_REGISTRY = routeByHosts(url.hostname);
 const PROXY_REGISTRY = url.hostname;
