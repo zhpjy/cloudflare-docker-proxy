@@ -24,9 +24,6 @@ routes = [
   { pattern = "k8s.docker.zhpjy.top", custom_domain = true },
   { pattern = "ghcr.docker.zhpjy.top", custom_domain = true },
   { pattern = "cloudsmith.docker.zhpjy.top", custom_domain = true },
-  { pattern = "*.docker.zhpjy.top", custom_domain = true },
-  { pattern = "*.*.docker.zhpjy.top", custom_domain = true },
-  { pattern = "*.*.*.docker.zhpjy.top", custom_domain = true },
 ]
 
 [env.production.vars]
