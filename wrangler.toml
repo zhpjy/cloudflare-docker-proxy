@@ -38,5 +38,6 @@ name = "cloudflare-docker-proxy-staging"
 MODE = "staging"
 TARGET_UPSTREAM = ""
 
-[observability.logs]
-invocation_logs = false
+[observability]
+enabled = true
+head_sampling_rate = 1 # optional. default = 1.
