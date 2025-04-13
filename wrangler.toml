@@ -7,7 +7,7 @@ port = 8787
 local_protocol = "http"
 
 [env.vars]
-CUSTOM_DOMAIN = "zhpjy.top"
+CUSTOM_DOMAIN = "docker.zhpjy.top"
 
 [env.dev.vars]
 MODE = "debug"
