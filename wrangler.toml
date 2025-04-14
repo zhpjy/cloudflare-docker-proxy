@@ -24,6 +24,14 @@ routes = [
   { pattern = "k8s.docker.zhpjy.top", custom_domain = true },
   { pattern = "ghcr.docker.zhpjy.top", custom_domain = true },
   { pattern = "cloudsmith.docker.zhpjy.top", custom_domain = true },
+
+  { pattern = "quay.io.docker.zhpjy.top", custom_domain = true },
+  { pattern = "gcr.io.docker.zhpjy.top", custom_domain = true },
+  { pattern = "k8s.gcr.io.docker.zhpjy.top", custom_domain = true },
+  { pattern = "registry.k8s.io.docker.zhpjy.top", custom_domain = true },
+  { pattern = "ghcr.io.docker.zhpjy.top", custom_domain = true },
+  { pattern = "docker.cloudsmith.io.docker.zhpjy.top", custom_domain = true },
+  { pattern = "public.ecr.aws.docker.zhpjy.top", custom_domain = true },
 ]
 
 [env.production.vars]
