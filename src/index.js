@@ -52,12 +52,15 @@ function modifyUrlIfFirstDirIs(urlString, targetDir) {
 
   // 4. 检查第一个目录是否是目标目录
   if (pathSegments.length > 0 && pathSegments[0] === targetDir) {
+    console.log(`第一个目录是 "${targetDir}", 需要修改 URL。`);
     // 5. 构建新的路径名：取第一个目录之后的所有部分
     const remainingSegments = pathSegments.slice(1);
     const newPathname = '/' + remainingSegments.join('/');
     url.pathname = newPathname;
+    console.log(`修改后的 URL: ${url.href}`);
     return url.href;
   } else {
+    console.log(`第一个目录不是 "${targetDir}"`);
     return null;
   }
 }
@@ -65,7 +68,7 @@ function modifyUrlIfFirstDirIs(urlString, targetDir) {
 
 async function handleRequest(request) {
   let rawUrl = modifyUrlIfFirstDirIs(request.url,password);
-  if(rawUrl == null){
+  if(rawUrl === null){
     return new Response(
       JSON.stringify({
         // routes: routes,
