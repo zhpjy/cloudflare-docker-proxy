@@ -40,7 +40,7 @@ function routeByHosts(host) {
   return "";
 }
 
-function modifyUrlIfFirstDirIs(urlString, targetDir) {
+function modifyUrlIfSecondDirIs(urlString, targetDir) {
   const url = new URL(urlString);
   const pathname = url.pathname;
 
@@ -51,23 +51,23 @@ function modifyUrlIfFirstDirIs(urlString, targetDir) {
   const pathSegments = pathname.split('/').filter(segment => segment.length > 0);
 
   // 4. 检查第一个目录是否是目标目录
-  if (pathSegments.length > 0 && pathSegments[0] === targetDir) {
-    console.log(`第一个目录是 "${targetDir}", 需要修改 URL。`);
+  if (pathSegments.length > 1 && pathSegments[1] === targetDir) {
+    console.log(`目录是 "${targetDir}", 需要修改 URL。`);
     // 5. 构建新的路径名：取第一个目录之后的所有部分
-    const remainingSegments = pathSegments.slice(1);
-    const newPathname = '/' + remainingSegments.join('/');
+    const newPathSegments = pathSegments.filter((segment, index) => index !== 1);
+    const newPathname = '/' + newPathSegments.join('/');
     url.pathname = newPathname;
     console.log(`修改后的 URL: ${url.href}`);
     return url.href;
   } else {
-    console.log(`第一个目录不是 "${targetDir}"`);
+    console.log(`目录不是 "${targetDir}"`);
     return null;
   }
 }
 
 
 async function handleRequest(request) {
-  let rawUrl = modifyUrlIfFirstDirIs(request.url,password);
+  let rawUrl = modifyUrlIfSecondDirIs(request.url,password);
   if(rawUrl === null){
     return new Response(
       JSON.stringify({
