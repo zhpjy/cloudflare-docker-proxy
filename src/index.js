@@ -64,8 +64,8 @@ function modifyUrlIfFirstDirIs(urlString, targetDir) {
 
 
 async function handleRequest(request) {
-  let newUrl = modifyUrlIfFirstDirIs(request.url,password);
-  if(newUrl == null){
+  let rawUrl = modifyUrlIfFirstDirIs(request.url,password);
+  if(rawUrl == null){
     return new Response(
       JSON.stringify({
         // routes: routes,
@@ -76,7 +76,7 @@ async function handleRequest(request) {
       }
     );
   } 
-  const url = new URL(newUrl);
+  const url = new URL(rawUrl);
   const upstream = routeByHosts(url.hostname);
   if (upstream === "") {
     return new Response(
