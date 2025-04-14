@@ -32,6 +32,7 @@ routes = [
   { pattern = "ghcr.io.docker.zhpjy.top", custom_domain = true },
   { pattern = "docker.cloudsmith.io.docker.zhpjy.top", custom_domain = true },
   { pattern = "public.ecr.aws.docker.zhpjy.top", custom_domain = true },
+  { pattern = "lscr.io.docker.zhpjy.top", custom_domain = true },
 ]
 
 [env.production.vars]
