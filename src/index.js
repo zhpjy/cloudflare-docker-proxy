@@ -3,7 +3,6 @@ addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
 });
 
-const password = 'fsgy';
 const dockerHub = "https://registry-1.docker.io";
 
 const routes = {
@@ -40,48 +39,11 @@ function routeByHosts(host) {
   return "";
 }
 
-function modifyUrlIfSecondDirIs(urlString, targetDir) {
-  const url = new URL(urlString);
-  const pathname = url.pathname;
-
-  // 3. 分割路径名，并过滤掉因开头/结尾/连续的'/'产生的空字符串
-  //    "/fsyg/abc" -> ["", "fsyg", "abc"] -> ["fsyg", "abc"]
-  //    "/" -> ["", ""] -> []
-  //    "/fsyg/" -> ["", "fsyg", ""] -> ["fsyg"]
-  const pathSegments = pathname.split('/').filter(segment => segment.length > 0);
-
-  // 4. 检查第一个目录是否是目标目录
-  if (pathSegments.length > 1 && pathSegments[1] === targetDir) {
-    console.log(`目录是 "${targetDir}", 需要修改 URL。`);
-    // 5. 构建新的路径名：取第一个目录之后的所有部分
-    const newPathSegments = pathSegments.filter((segment, index) => index !== 1);
-    const newPathname = '/' + newPathSegments.join('/');
-    url.pathname = newPathname;
-    console.log(`修改后的 URL: ${url.href}`);
-    return url.href;
-  } else {
-    console.log(`目录不是 "${targetDir}"`);
-    return null;
-  }
-}
-
 
 async function handleRequest(request) {
-  let rawUrl = modifyUrlIfSecondDirIs(request.url,password);
-  if(rawUrl === null){
-    return new Response(
-      JSON.stringify({
-        // routes: routes,
-        "mailMe":"QuestMystery@outlook.com"
-      }),
-      {
-        status: 404,
-      }
-    );
-  } 
-  const url = new URL(rawUrl);
+  const url = new URL(request.url);
   const upstream = routeByHosts(url.hostname);
-  if (upstream === "") {
+  if (upstream === ""||url.pathname==""||url.pathname=="/") {
     return new Response(
       JSON.stringify({
         // routes: routes,
