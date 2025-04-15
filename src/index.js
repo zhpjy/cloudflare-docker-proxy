@@ -40,7 +40,7 @@ function routeByHosts(host) {
 }
 
 function defaultResponse(){
-  new Response(
+  return new Response(
     JSON.stringify({
       // routes: routes,
       "mailMe":"QuestMystery@outlook.com"
@@ -57,7 +57,7 @@ async function handleRequest(request) {
   if(!userAgent.includes("docker")){
     return defaultResponse();
   }
-  
+
   const url = new URL(request.url);
   const upstream = routeByHosts(url.hostname);
   if (upstream === ""||url.pathname==""||url.pathname=="/") {
