@@ -55,6 +55,7 @@ async function handleRequest(request) {
   const userAgentHeader = request.headers.get('User-Agent');
   const userAgent = userAgentHeader ? userAgentHeader.toLowerCase() : "null";
   if(!userAgent.includes("docker")){
+    console.log("not allow UA: "+userAgent);
     return defaultResponse();
   }
 
