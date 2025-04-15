@@ -39,20 +39,29 @@ function routeByHosts(host) {
   return "";
 }
 
+function defaultResponse(){
+  new Response(
+    JSON.stringify({
+      // routes: routes,
+      "mailMe":"QuestMystery@outlook.com"
+    }),
+    {
+      status: 404,
+    }
+  );
+}
 
 async function handleRequest(request) {
+  const userAgentHeader = request.headers.get('User-Agent');
+  const userAgent = userAgentHeader ? userAgentHeader.toLowerCase() : "null";
+  if(!userAgent.includes("docker")){
+    return defaultResponse();
+  }
+  
   const url = new URL(request.url);
   const upstream = routeByHosts(url.hostname);
   if (upstream === ""||url.pathname==""||url.pathname=="/") {
-    return new Response(
-      JSON.stringify({
-        // routes: routes,
-        "mailMe":"QuestMystery@outlook.com"
-      }),
-      {
-        status: 404,
-      }
-    );
+    return defaultResponse();
   }
   const isDockerHub = upstream == dockerHub;
   const authorization = request.headers.get("Authorization");
